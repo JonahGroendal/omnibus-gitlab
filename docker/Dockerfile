@@ -14,6 +14,7 @@ RUN apt-get update -q \
       openssh-server \
       tzdata \
       wget \
+      libatomic1 \
     && rm -rf /var/lib/apt/lists/*
 
 # Use BusyBox
@@ -55,3 +56,4 @@ CMD ["/assets/wrapper"]
 
 HEALTHCHECK --interval=60s --timeout=30s --retries=5 \
 CMD /opt/gitlab/bin/gitlab-healthcheck --fail --max-time 10
+

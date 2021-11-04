@@ -1,15 +1,20 @@
-web:
-  image: 'gitlab/gitlab-ce:latest'
+gitlab-server:
+  build: .
   restart: always
-  hostname: 'gitlab.example.com'
+  hostname: 'pi4-gitlab'
   environment:
     GITLAB_OMNIBUS_CONFIG: |
-      external_url 'https://gitlab.example.com'
+      external_url 'http://192.168.1.13:8929'
+      gitlab_rails['gitlab_shell_ssh_port'] = 2224
+      puma['worker_processes'] = 2
+      sidekiq['concurrency'] = 9
+      prometheus_monitoring['enable'] = false
   ports:
-    - '80:80'
-    - '443:443'
-    - '22:22'
+    - '8929:8929'
+    - '2224:22'
   volumes:
-    - '/srv/gitlab/config:/etc/gitlab'
-    - '/srv/gitlab/logs:/var/log/gitlab'
-    - '/srv/gitlab/data:/var/opt/gitlab'
+    - './config:/etc/gitlab'
+    - './logs:/var/log/gitlab'
+    - '/media/external_hdd/gitlab-data:/var/opt/gitlab'
+  mem_limit: 2000000000
+  memswap_limit: 6000000000

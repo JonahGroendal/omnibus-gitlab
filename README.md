@@ -1,3 +1,19 @@
+# Clone of official Omnibus Gilab repo
+
+periodically do a
+```
+git pull https://gitlab.com/gitlab-org/omnibus-gitlab.git master
+```
+to merge in upstream changes.
+
+Docker container stuff is in the `docker` directory. Modified to work with my pi4 setup.
+
+To update the container, update the RELEASE file and rebuild the image. Gitlab download links are here: https://packages.gitlab.com/gitlab/gitlab-ee
+
+
+Original README is below:
+
+
 # Omnibus GitLab
 
 ## Description
